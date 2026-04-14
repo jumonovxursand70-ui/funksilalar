@@ -99,8 +99,234 @@
 #8misol
 def AddRightDigit(son,raqam):
     return son*10+raqam
+#include <iostream>
+#include <cmath>
+#include <iomanip>
 
-k=int(input())
-r=int(input())
+using namespace std;
 
-print(AddRightDigit(k, r))
+// 1-masala: 3-daraja
+double PowerA3(double n) {
+    return n * n * n;
+}
+
+// 2-masala: 2, 3, 4-darajalar
+void PowerA234(float a, float &a2, float &a3, float &a4) {
+    a2 = a * a;
+    a3 = a2 * a;
+    a4 = a3 * a;
+}
+
+// 3-masala: O'rta arifmetik va geometrik
+void MEAN(float x, float y, float &am, float &gm) {
+    am = (x + y) / 2.0;
+    gm = sqrt(x * y);
+}
+
+// 4-masala: Uchburchak P va S
+void Triangle(float a, float &P, float &S) {
+    P = 3 * a;
+    S = (pow(a, 2) * sqrt(3)) / 4;
+}
+
+// 5-masala: To'rtburchak koordinata orqali
+void RectPS(int x1, int y1, int x2, int y2, int &P, int &S) {
+    int a = abs(x1 - x2);
+    int b = abs(y1 - y2);
+    P = 2 * (a + b);
+    S = a * b;
+}
+
+// 6-masala: Raqamlar soni va yig'indisi
+void DigitCountSum(int n, int &count, int &sum) {
+    count = 0; sum = 0;
+    n = abs(n);
+    if (n == 0) { count = 1; sum = 0; return; }
+    while (n > 0) {
+        sum += n % 10;
+        count++;
+        n /= 10;
+    }
+}
+
+// 7-masala: Raqamlarni teskari qilish
+int InvertDigit(int n) {
+    int res = 0;
+    while (n > 0) {
+        res = res * 10 + (n % 10);
+        n /= 10;
+    }
+    return res;
+}
+
+// 8-masala: O'ngga raqam qo'shish
+int AddRightDigit(int son, int raqam) {
+    return son * 10 + raqam;
+}
+
+int main() {
+    cout << fixed << setprecision(2);
+
+    // Test FunSimple1
+    cout << "--- FunSimple1 ---" << endl;
+    double a1=2, b1=3, c1=4; int d1=5, e1=6;
+    cout << "2^3=" << PowerA3(a1) << ", 5^3=" << PowerA3(d1) << endl;
+
+    // Test FunSimple2
+    cout << "\n--- FunSimple2 ---" << endl;
+    float r2, r3, r4;
+    PowerA234(2.0, r2, r3, r4);
+    cout << "2 ning darajalari: " << r2 << ", " << r3 << ", " << r4 << endl;
+
+    // Test FunSimple3
+    cout << "\n--- FunSimple3 ---" << endl;
+    float am, gm;
+    MEAN(4, 9, am, gm);
+    cout << "4 va 9 uchun AM=" << am << ", GM=" << gm << endl;
+
+    // Test FunSimple4
+    cout << "\n--- FunSimple4 ---" << endl;
+    float P4, S4;
+    Triangle(6, P4, S4);
+    cout << "Tomoni 6 bo'lgan uchburchak: P=" << P4 << ", S=" << S4 << endl;
+
+    // Test FunSimple5
+    cout << "\n--- FunSimple5 ---" << endl;
+    int P5, S5;
+    RectPS(0, 0, 4, 3, P5, S5);
+    cout << "(0,0) va (4,3) nuqtalar: P=" << P5 << ", S=" << S5 << endl;
+
+    // Test FunSimple6
+    cout << "\n--- FunSimple6 ---" << endl;
+    int cnt, sm;
+    DigitCountSum(1234, cnt, sm);
+    cout << "1234 soni: " << cnt << " ta raqam, yig'indisi=" << sm << endl;
+
+    // Test FunSimple7
+    cout << "\n--- FunSimple7 ---" << endl;
+    cout << "456 teskarisi: " << InvertDigit(456) << endl;
+
+    // Test FunSimple8
+    cout << "\n--- FunSimple8 ---" << endl;
+    cout << "120 ga 7 ni qo'shish: " << AddRightDigit(120, 7) << endl;
+
+    return 0;
+}
+Используйте код с осторожностью.
+Ushbu kodni kompyuteringizda C++ muhitida (masalan, Dev-C++ yoki VS Code) bemalol ishlatishingiz mumkin.
+Yana qaysi masalani tahlil qilamiz?
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// FunSimple9: Raqamni boshiga qo'shish
+void AddLeftDigit(int *son, int raqam) {
+    int temp = *son, d = 1;
+    while (temp > 0) {
+        temp /= 10;
+        d *= 10;
+    }
+    *son = raqam * d + *son;
+}
+
+// FunSimple10: Qiymat almashtirish
+void Swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// FunSimple11: Kichigini X ga, kattasini Y ga yozish
+void Minmax(int *x, int *y) {
+    if (*x > *y) {
+        int temp = *x;
+        *x = *y;
+        *y = temp;
+    }
+}
+
+// FunSimple12: O'sish tartibida saralash
+void SortInc3(int *a, int *b, int *c) {
+    if (*a > *b) Swap(a, b);
+    if (*b > *c) Swap(b, c);
+    if (*a > *b) Swap(a, b);
+}
+
+// FunSimple13: Kamayish tartibida saralash
+void SortDec3(int *a, int *b, int *c) {
+    if (*a < *b) Swap(a, b);
+    if (*b < *c) Swap(b, c);
+    if (*a < *b) Swap(a, b);
+}
+
+// FunSimple14: O'ngga siljitish
+void ShiftRight3(int *a, int *b, int *c) {
+    int temp = *c;
+    *c = *b;
+    *b = *a;
+    *a = temp;
+}
+
+// FunSimple15: Chapga siljitish
+void ShiftLeft3(int *a, int *b, int *c) {
+    int temp = *a;
+    *a = *b;
+    *b = *c;
+    *c = temp;
+}
+
+// FunSimple16: Son ishorasini aniqlash
+int ishora(double x) {
+    if (x < 0) return -1;
+    if (x > 0) return 1;
+    return 0;
+}
+
+// FunSimple17: Kvadrat tenglama ildizlari soni
+int RootCount(double a, double b, double c) {
+    double D = b * b - 4 * a * c;
+    if (D > 0) return 2;
+    if (D == 0) return 1;
+    return 0;
+}
+
+// FunSimple18: Doira yuzi
+double Area(double r) {
+    const double PI = 3.1415;
+    return PI * r * r;
+}
+
+int main() {
+    // Test uchun o'zgaruvchilar
+    int a = 10, b = 20, c = 5;
+    int s = 123, r = 5;
+
+    // 1. AddLeftDigit testi
+    AddLeftDigit(&s, r);
+    cout << "9. AddLeftDigit (5 ni 123 boshiga): " << s << endl;
+
+    // 2. SortInc3 testi
+    int x = 30, y = 10, z = 20;
+    SortInc3(&x, &y, &z);
+    cout << "12. SortInc3 (o'sish): " << x << ", " << y << ", " << z << endl;
+
+    // 3. Ishora funksiyasi testi
+    double n1 = -5.5, n2 = 10.2;
+    cout << "16. Ishora yig'indisi: " << ishora(n1) + ishora(n2) << endl;
+
+    // 4. Doira yuzi testi
+    cout << "18. Doira yuzi (R=3): " << Area(3) << endl;
+
+    return 0;
+}
+
+
+
+ ,
+
+
+
+
+
+
